@@ -7,11 +7,12 @@ Projet en Java reprenant le jeu The Game
 
 **Considérer**
 * Indentation cohérente                       
-* Noms des variables et des fonctions pertinantes
+* Noms des variables et des fonctions/méthodes pertinantes
 * Définir des types et constantes
 * Définir des méthodes de d'instance et de classe
-* Rédiger des commentaires
-* Structuration des classes cohérentes
+* Rédiger des commentaires 
+* Structuration des classes cohérentes et mise en place d'une interface
+* Diagramme UML
 
 ***
 
