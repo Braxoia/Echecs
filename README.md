@@ -1,7 +1,5 @@
 # Echecs
 Jeu d'Echecs en Java 
-# Le Duel
-Projet en Java reprenant le jeu The Game
 
 ***
 
