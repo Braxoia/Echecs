@@ -1,5 +1,8 @@
 package appli;
 
+import echiquier.Echiquier;
+import pieces.*;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -10,6 +13,15 @@ public class Application {
 	    *    Si 1 joueur : scanner uniquement pour le joueur, boucle simplifié car on a juste à étudier un joueur
 	    *    Si 2 IA :  pas de scanner, tout est géré directement dans notre algo et on gère l'affichag
 	    */
+
+
+		Echiquier echiquier = new Echiquier();
+		IPiece roi = new Roi("R", Couleur.BLANC, new Coordonnées(5,4), echiquier);
+		IPiece tour = new Tour("t", Couleur.NOIR, new Coordonnées(0, 0), echiquier);
+		roi.manger(tour);
+
+
+		System.out.println(echiquier);
 
     }
 }
