@@ -1,14 +1,16 @@
 package pieces;
 
-public abstract class Piece {
-    private String nom;
-    private Couleur couleur;
+import echiquier.Echiquier;
 
-    public abstract boolean coupValide();
-    public abstract void deplacer();
+public abstract class Piece implements IPiece {
+    protected String nom;
+    protected Couleur couleur;
+    protected Coordonnées coord;
 
-    public Piece(String nom, Couleur couleur) {
+    public Piece(String nom, Couleur couleur, Coordonnées coord, Echiquier echiquier) {
         this.nom = nom;
         this.couleur = couleur;
+        this.coord = coord;
+        echiquier.getEchiquier()[coord.getX()][coord.getY()].setPiece(this);
     }
 }

@@ -1,6 +1,8 @@
 package pieces;
 
 public interface IPiece {
-    public abstract void manger(IPiece IPiece);
-    public void mortPiece(IPiece IPiece);
+    void manger(IPiece IPiece);
+    void mortPiece(IPiece IPiece);
+    boolean coupValide();
+    void deplacer();
 }
