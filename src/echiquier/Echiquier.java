@@ -12,8 +12,6 @@ public class Echiquier {
             for(int i = 0; i < hauteur.length; ++i)
                 hauteur[i] = new Case();
     }
-<<<<<<< HEAD
-=======
 
     public String toString() {
 
@@ -44,7 +42,6 @@ public class Echiquier {
 
     }
 }
->>>>>>> 8998118e36a17e1307fe1d50418846081d2c0eb5
 
     public String toString() {
         final String str = System.lineSeparator();
