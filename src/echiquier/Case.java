@@ -1,9 +1,10 @@
 package echiquier;
 
+import pieces.IPiece;
 import pieces.Piece;
 
 public class Case {
-    private Piece piece;
+    private IPiece piece;
 
     public Case() {
         this.piece = null;
@@ -17,7 +18,13 @@ public class Case {
             return piece.toString();
     }
 
-    public void setPiece(Piece piece) {
+    public void setPiece(IPiece piece) {
         this.piece = piece;
     }
+
+    public IPiece getPiece() {
+        return piece;
+    }
+
+
 }

@@ -34,19 +34,14 @@ public class Echiquier {
 
     public int[] decompose(String s) {
         String[] saisie = new String[4];
-        int[] nvCoord = new int[2];
+        int[] nvCoord = new int[4];
         for (int i = 0; i < saisie.length; i++) {
             saisie[i] = s.substring(i, i + 1);
             saisie[i] = correspondances(saisie[i]);
-
         }
-        for(int k=0;k<saisie.length;k++){
-            for (int j = 0; j < nvCoord.length; j++) {
-                nvCoord[j] = Integer.parseInt(saisie[j+2]);
-
-            }
+        for(int j=0; j < nvCoord.length; j++){
+          nvCoord[j] = Integer.parseInt(saisie[j]);
         }
-
         return nvCoord;
     }
 

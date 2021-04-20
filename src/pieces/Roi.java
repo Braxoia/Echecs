@@ -1,11 +1,12 @@
 package pieces;
 
 import echiquier.Echiquier;
+import echiquier.Case;
 
 public class Roi extends Piece {
 
-    public Roi(Couleur couleur, Coordonnées coord, Echiquier echiquier) {
-        super(couleur, coord, echiquier);
+    public Roi(Couleur couleur, Echiquier echiquier) {
+        super(couleur, echiquier);
     }
 
     @Override
@@ -22,7 +23,10 @@ public class Roi extends Piece {
     }
 
     @Override
-    public void deplacer(Coordonnées coordonnées, Echiquier echiquier) {
+    public void deplacer(Case caseSource, Case caseDestination) {
+        caseDestination.setPiece(caseSource.getPiece());
+        caseSource.setPiece(null);
+
         /*if (colonne < 1 || colonne > 8 || ligne < 1 || ligne > 8)
             return false;
         if (Math.abs(this.getColonne() - colonne) != Math.abs(this.getLigne() - ligne))
@@ -33,18 +37,11 @@ public class Roi extends Piece {
             if (e.estLibre(this.getColonne() + i * dx, this.getLigne() + i * dy))
                 return false;
         return true; */
-
-        echiquier.getEchiquier()[coord.getX()][coord.getY()].setPiece(null);
-        echiquier.getEchiquier()[coordonnées.getX()][coordonnées.getY()].setPiece(this);
-        coord.setX(coordonnées.getX());
-        coord.setY(coordonnées.getY());
     }
 
-    /*@Override
-    public boolean deplacementPossible(Coordonnées coordonnées, Echiquier echiquier) {
-        if(!dansLesLimites())
-            return false;
-        return true;
-    }*/
+    @Override
+    public boolean deplacementPossible(Echiquier echiquier) {
+        return false;
+    }
 
 }

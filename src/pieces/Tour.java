@@ -1,10 +1,11 @@
 package pieces;
 
+import echiquier.Case;
 import echiquier.Echiquier;
 
 public class Tour extends Piece {
-    public Tour(Couleur couleur, Coordonnées coord, Echiquier echiquier) {
-        super(couleur, coord, echiquier);
+    public Tour(Couleur couleur, Echiquier echiquier) {
+        super(couleur, echiquier);
     }
 
     @Override
@@ -15,28 +16,20 @@ public class Tour extends Piece {
             return "t";
     }
 
-    //useless mais à vérifier
-    @Override
-    public void manger(IPiece IPiece) {
-
-    }
-
     @Override
     public boolean coupValide() {
         return false;
     }
 
+
     @Override
-    public void deplacer(Coordonnées coordonnées, Echiquier echiquier) {
-        echiquier.getEchiquier()[coord.getX()][coord.getY()].setPiece(null);
-        echiquier.getEchiquier()[coordonnées.getX()][coordonnées.getY()].setPiece(this);
-        coord.setX(coordonnées.getX());
-        coord.setY(coordonnées.getY());
+    public void deplacer(Case caseSource, Case caseDestination) {
+        
     }
 
-    /*@Override
-    public boolean deplacementPossible(Coordonnées coordonnées, Echiquier echiquier) {
+    @Override
+    public boolean deplacementPossible(Echiquier echiquier) {
         return false;
-    }*/
+    }
 
 }
