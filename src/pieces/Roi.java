@@ -17,16 +17,6 @@ public class Roi extends Piece {
     }
 
     @Override
-    public void manger(IPiece IPiece) {
-
-    }
-
-    @Override
-    public void mortPiece(IPiece IPiece) {
-
-    }
-
-    @Override
     public boolean coupValide() {
         return false;
     }

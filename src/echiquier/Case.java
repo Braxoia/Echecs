@@ -3,7 +3,7 @@ package echiquier;
 import pieces.Piece;
 
 public class Case {
-    private Piece piece;;
+    private Piece piece;
 
     public Case() {
         this.piece = null;

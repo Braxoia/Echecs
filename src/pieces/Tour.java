@@ -21,12 +21,6 @@ public class Tour extends Piece {
 
     }
 
-    //useless
-    @Override
-    public void mortPiece(IPiece IPiece) {
-
-    }
-
     @Override
     public boolean coupValide() {
         return false;
