@@ -1,12 +1,8 @@
 package echiquier;
 
-import pieces.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Echiquier {
     public static final int MAX = 8;
+    public static final int MIN = 0;
     private Case[][] echiquier;
     // private ArrayList<IPiece> blanches = new ArrayList<IPiece>(Arrays.asList(new Roi(Couleur.BLANC, new Coordonnées(2, 4), this), new Fou(Couleur.BLANC, new Coordonnées(1, 1), this)));
     // private ArrayList<IPiece> noires = new ArrayList<IPiece>(Arrays.asList(new Roi(Couleur.NOIR, new Coordonnées(0, 4), this)));
@@ -19,17 +15,13 @@ public class Echiquier {
                 hauteur[i] = new Case();
     }
 
-    public static boolean coupsPossibles(String saisie) {
-        /*final int verifNbEntreDernier = Integer.parseInt(String.valueOf(saisie.charAt(3)));
+    public static boolean saisieCorrecte(String saisie) {
+        final int verifNbEntreDernier = Integer.parseInt(String.valueOf(saisie.charAt(3)));
         final int verifNbEntrePremier = Integer.parseInt(String.valueOf(saisie.charAt(1)));
-        if (saisie.length() != 4 || saisie.charAt(0) > 'h' || saisie.charAt(2) > 'h' || saisie.charAt(0) < 'a' || saisie.charAt(2) < 'a'
-                || verifNbEntrePremier > MAX
-                || verifNbEntreDernier > MAX
-                || verifNbEntrePremier <= 0
-                || verifNbEntreDernier <= 0)
-            return false;*/
-
-        return true;
+        return saisie.length() == 4 && saisie.charAt(0) <= 'h' && saisie.charAt(2) <= 'h'
+                                    && saisie.charAt(0) >= 'a' && saisie.charAt(2) >= 'a'
+                                    && verifNbEntrePremier <= MAX && verifNbEntreDernier <= MAX
+                                    && verifNbEntrePremier > MIN  && verifNbEntreDernier > MIN;
     }
 
     public int[] decompose(String s) {
@@ -37,10 +29,14 @@ public class Echiquier {
         int[] nvCoord = new int[4];
         for (int i = 0; i < saisie.length; i++) {
             saisie[i] = s.substring(i, i + 1);
+            //TODO : Arrêtez la fonction dans le cas où l'on rencontre un -1
+            if(saisie[i].equals("-1")){
+                return nvCoord;
+            }
             saisie[i] = correspondances(saisie[i]);
         }
         for(int j=0; j < nvCoord.length; j++){
-          nvCoord[j] = Integer.parseInt(saisie[j]);
+            nvCoord[j] = Integer.parseInt(saisie[j]);
         }
         return nvCoord;
     }
@@ -72,7 +68,7 @@ public class Echiquier {
             case "1":
                 return "7";
         }
-        return null;
+        return "-1";
     }
 
     public String toString() {

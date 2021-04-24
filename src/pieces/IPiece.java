@@ -8,7 +8,7 @@ public interface IPiece {
     void mortPiece(IPiece IPiece);*/
     boolean coupValide();
     void deplacer(Case caseSource, Case caseDestination);
-    boolean deplacementPossible(Echiquier echiquier);
+    boolean deplacementPossible(Echiquier echiquier, int[] coord);
 
     /*static void déplacer(IPiece piece, Coordonnées coordonnées, Echiquier echiquier) {
         echiquier.getEchiquier()[coordonnées.getX()][coordonnées.getY()].setPiece(this);

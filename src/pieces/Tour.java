@@ -28,8 +28,28 @@ public class Tour extends Piece {
     }
 
     @Override
-    public boolean deplacementPossible(Echiquier echiquier) {
-        return false;
+    public boolean deplacementPossible(Echiquier echiquier, int[] coord) {
+
+        //TODO : Condition à régler pour le déplacement soit effectif
+
+        /*if(coord[1]==coord[3] && (coord[2] < Echiquier.MIN || coord[2] >= Echiquier.MAX|| coord[2]==coord[0]) ){
+            return false;
+        }
+        if(coord[0] == coord[2] && (coord[3] < Echiquier.MIN || coord[3] >= Echiquier.MAX || coord[3]!=coord[1])){
+            return false;
+        }
+        return true; */
+
+
+        /* if( (coord[1] == coord[3] && (coord[2] < Echiquier.MIN || coord[2] >= Echiquier.MAX|| coord[2] == coord[0])) ||
+                (coord[0] == coord[2] && (coord[3] < Echiquier.MIN || coord[3] >= Echiquier.MAX || coord[3] != coord[1]))
+        )*/
+
+        if (coord[0] != coord[2] && coord[1] != coord[3] ||
+                ( coord[0] == coord[2] && coord[1] == coord[3]) || ( coord[1] == coord[3] && coord[0] == coord[2]) )
+            return false;
+
+        return true;
     }
 
 }

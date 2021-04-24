@@ -21,15 +21,25 @@ public class Application {
 		echiquier.getEchiquier()[1][1].setPiece(tour);
 		//IPiece fou2 = new Fou (Couleur.BLANC, new Coordonnées(5,4), echiquier); Il écrase lorsque les deux sont sur la même coordonnées
 		IPiece roi = new Roi(Couleur.BLANC, echiquier);
-		echiquier.getEchiquier()[1][1].setPiece(roi);
+		echiquier.getEchiquier()[5][4].setPiece(roi);
+
 		String saisie;
 		int[] coord = new int[4];
 		System.out.println(echiquier);
 		Scanner sc= new Scanner(System.in);
 		saisie = sc.nextLine();
-		while (Echiquier.coupsPossibles(saisie)) {
+
+
+		/*while (Echiquier.saisieCorrecte(saisie)) {
 			coord = echiquier.decompose(saisie);
-			roi.deplacer(
+
+			//ligne à gérer car exception possible
+			//verifier qu'il y a bien une piece sur la case
+			IPiece piece = echiquier.getEchiquier()[coord[0]][coord[1]].getPiece();
+			if(!piece.deplacementPossible(echiquier, coord))
+				continue;
+
+			piece.deplacer(
 					echiquier.getEchiquier()[coord[0]][coord[1]],
 					echiquier.getEchiquier()[coord[2]][coord[3]]
 			);
@@ -37,9 +47,14 @@ public class Application {
 			System.out.println(echiquier);
 			saisie = sc.nextLine();
 
-		}
+		}*/
 
 		System.out.println(echiquier);
+
+		/*if(!tour.deplacementPossible(echiquier, new int[]{1, 1, 1, 7}))
+			System.out.println("Eh mon gars va te faire");*/
+		if(!roi.deplacementPossible(echiquier, new int[]{5, 4, 2, 3}))
+			System.out.println("Eh mon gars va te faire");
 	}
 
 }
