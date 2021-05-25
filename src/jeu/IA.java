@@ -6,7 +6,6 @@ import java.util.*;
 
 import echiquier.Echiquier;
 import echiquier.IPiece;
-import pieces.FabriquePiece;
 
 /**
  * @author A.Ibrahime, B.Marco, P.Julie
@@ -18,7 +17,7 @@ public class IA extends Joueur{
     Random r = new Random();
     
     //Constructeur
-    public IA(Couleur couleur, FabriquePiece.Mode mode) throws Exception {
+    public IA(Couleur couleur, Mode mode) throws Exception {
         super(couleur, mode);
     }
 
