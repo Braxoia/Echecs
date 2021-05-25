@@ -38,7 +38,7 @@ public class Echiquier {
     }
 
     /**
-     * @brief M�thode qui verifie si la saisie de l'utilisateur
+     * @brief Méthode qui verifie si la saisie de l'utilisateur
      * 		  respecte le format impose
      * @param saisie la saisie a verifier
      * @return si la saisie est correcte
@@ -151,9 +151,12 @@ public class Echiquier {
         int[] roiAdversePos = recuperationRoiAdverse(jeu, jeu.getJoueurActif().getCouleur());
         ArrayList<int[]> coordPieceAdverse = coordPiecesAdverses(couleurJoueurActif);
         ArrayList<int[]> coupsPossibles = deplacementsPossibles(jeu,roiAdversePos);
+        IPiece pieceMangee = null;
 
         //Test pour chaque coup possible et pour chaque piece adverse, si le roi est mis en echec
-        for (int[] coupPossible : coupsPossibles) {
+        for (int[] coupPossible : coupsPossibles){
+            if(cases[coupPossible[2]][coupPossible[3]] != null)
+                pieceMangee = cases[coupPossible[2]][coupPossible[3]];
 
             //On deplace le roi a une nouvelle position
             this.deplacer(
@@ -163,18 +166,19 @@ public class Echiquier {
                     new int[]{roiAdversePos[0], roiAdversePos[1], coupPossible[2], coupPossible[3]}
             );
 
-            //On verifie si au moins une des pieces adverse met en echec le roi sur la nouvelle case ou il se trouve
+            //On verifie si au moins une des pieces adverse met en echec le roi sur la nouvelle case où il se trouve
             for (int[] pieceAdverse : coordPieceAdverse) {
                 if (echec(jeu, cases[pieceAdverse[0]][pieceAdverse[1]], pieceAdverse, couleurJoueurActif)) {
 
-                    //On redeplace le roi a sa position initiale pour tester l'echec a une autre coordonnees
+                    //On redeplace le roi a sa position initiale pour tester l'echec à une autre coordonnees
                     this.deplacer(
                             jeu,
                             cases[coupPossible[2]][coupPossible[3]],
                             cases[roiAdversePos[0]][roiAdversePos[1]], new int[]{coupPossible[2],
                                     coupPossible[3], roiAdversePos[0], roiAdversePos[1]}
                     );
-
+                    cases[coupPossible[2]][coupPossible[3]] = pieceMangee;
+                    pieceMangee = null;
                     pasEchec = false;
                     break;
                 }
@@ -189,6 +193,7 @@ public class Echiquier {
                         cases[roiAdversePos[0]][roiAdversePos[1]], new int[]{coupPossible[2],
                                 coupPossible[3], roiAdversePos[0], roiAdversePos[1]}
                 );
+                cases[coupPossible[2]][coupPossible[3]] = pieceMangee;
                 return false;
             }
 
@@ -198,7 +203,7 @@ public class Echiquier {
 
 
     /**
-     * @brief Methode qui recup�re les coordonnes actuelles de toutes les pieces adverses
+     * @brief Methode qui recupère les coordonnes actuelles de toutes les pieces adverses
      * @param couleurJoueurActif la couleur du joueur actif
      * @return la liste des coordonnees des pieces adverses
      */
@@ -320,27 +325,15 @@ public class Echiquier {
         return true;
     }
 
-
-    /*public boolean echecEtPat(IJoueur joueurActif) {
-        Case[][] cases = echiquier.getCases();
-        int nbEchecs = 0;
-        for(int ligne = 0; ligne < Echiquier.MAX; ligne++){
-            for(int colonne = 0; colonne < Echiquier.MAX; colonne++) {
-                try {
-                    if (cases[ligne][colonne].getPiece().getCouleur() != couleurJoueurActif &&
-                            this.echec(cases[ligne][colonne].getPiece(), new int[]{colonne, ligne}, couleurJoueurActif)) {
-                        nbEchecs++;
-                    }
-                }
-                catch (NullPointerException e)
-                {
-                    continue;
-                }
-            }
-        }
-
-        return nbEchecs == joueurActif.getPieces().size();
-    }*/
+    /**
+     * @brief Vérifie si il y a un echec et mat sans echec au préalable
+     * @param jeu le jeu
+     * @param couleurJoueurActif la couleur du joueur actif
+     * @return Si il y a echec et pat
+     */
+    public boolean echecEtPat(Jeu jeu, Couleur couleurJoueurActif) {
+        return echecEtMat(jeu, couleurJoueurActif);
+    }
 
     /**
      * @brief Methode qui effectue le deplacement d'une piece
@@ -381,11 +374,9 @@ public class Echiquier {
             
             //Changement du joueur actif 
             jeu.changementJoueur();
-        } catch (Exception e) {
-            System.err.println("La piece ne peut pas �tre deplacee ici !");
+        }
+        catch (Exception e) {
+            System.err.println("La piece ne peut pas être deplacée ici !");
         }
     }
 }
-
-
-
