@@ -3,7 +3,6 @@ package jeu;
 import echiquier.IJoueur;
 import pieces.Couleur;
 import echiquier.IPiece;
-import pieces.*;
 
 import java.util.*;
 
@@ -17,10 +16,10 @@ public abstract class Joueur implements IJoueur {
 	//Joueur defini par sa couleur et sa liste de pieces
     private Couleur couleur;
     private ArrayList<IPiece> pieces;
-    private FabriquePiece.Mode modeDeJeu;
+    private Mode modeDeJeu;
 
     //Constructeur
-    public Joueur(Couleur couleur, FabriquePiece.Mode modeDeJeu) throws Exception {
+    public Joueur(Couleur couleur, Mode modeDeJeu) throws Exception {
         this.couleur=couleur;
         this.modeDeJeu = modeDeJeu;
         this.pieces = FabriquePiece.situation(this.modeDeJeu, this.couleur);
@@ -78,8 +77,7 @@ public abstract class Joueur implements IJoueur {
      * Methode qui recupere le mode de jeu
      * @return le mode de jeu du joueur
      */
-    public FabriquePiece.Mode getModeDeJeu() {
+    public Mode getModeDeJeu() {
         return this.modeDeJeu;
     }
 }
-
