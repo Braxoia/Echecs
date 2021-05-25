@@ -22,25 +22,27 @@ public class Application {
 		IPiece piece;
 		Jeu jeu;
 
-		String saisieMode, saisieSituation, saisie;
+		String saisieMode;
+		String saisieSituation;
+
 		int[] coord;
 		int[] coordArrivee = new int[2];
 
 		@SuppressWarnings("ressource")
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Choisissez la situation que vous désirer parmi les 3 choix (ouverture, millieu, finale)");
+		System.out.println("Choisissez la situation que vous désirer parmi les 3 choix (ouverture, milieu, finale)");
 		saisieSituation = sc.nextLine();
-		while(!(saisieSituation.trim().equalsIgnoreCase("ouverture") || saisieSituation.trim().equalsIgnoreCase("millieu") ||
+		while(!(saisieSituation.trim().equalsIgnoreCase("ouverture") || saisieSituation.trim().equalsIgnoreCase("milieu") ||
 				saisieSituation.trim().equalsIgnoreCase("finale"))) {
 			saisieSituation = sc.nextLine();
 		}
 
-		FabriquePiece.Mode modeDeJeu;
+		Mode modeDeJeu;
 		switch(saisieSituation.trim().toLowerCase()) {
-			case "finale" : { modeDeJeu = FabriquePiece.Mode.FINALE; break; }
-			case "ouverture" : { modeDeJeu = FabriquePiece.Mode.OUVERTURE; break; }
-			default : { modeDeJeu = FabriquePiece.Mode.MILLIEU; }
+			case "finale" : { modeDeJeu = Mode.FINALE; break; }
+			case "ouverture" : { modeDeJeu = Mode.OUVERTURE; break; }
+			default : { modeDeJeu = Mode.MILLIEU; }
 		}
 
 		System.out.println("Choisissez le premier et deuxieme joueur (HH pour humain/humain, IH pour IA/Humain, etc...)");
@@ -62,16 +64,14 @@ public class Application {
 		{
 			if(jeu.getJoueurActif().estUnHumain())
 			{
+				System.out.println("C'est au tour du joueur " + jeu.getJoueurActif().getCouleur());
 				coord = jeu.getJoueurActif().jouer(jeu);
-				if(coord[0] == -1) {
-					System.out.println("Partie nulle !");
-					break;
-				}
-				else if(coord[0] == -2)
-					continue;
-				else if(coord[0] == -3) {
-					System.out.println("Le joueur " + jeu.getJoueurActif().getCouleur() + " a perdu la partie !");
-					break;
+
+				switch(coord[0]) {
+					case -1: { System.out.println("Partie nulle !"); break; }
+					case -2: { continue; }
+					case -3: { System.out.println("Le joueur " + jeu.getJoueurActif().getCouleur() +
+							" a perdu la partie !"); break; }
 				}
 
 				coordArrivee[0] = coord[2];
@@ -104,8 +104,6 @@ public class Application {
 				if (etatPartie(pieceTrouver, jeu, coordArrivee)) break;
 				Thread.sleep(2000);
 			}
-
-
 		}
 	}
 	
@@ -125,15 +123,17 @@ public class Application {
 			}
 			case 2: {
 				System.out.println("Le joueur " + jeu.getJoueurActif().getCouleur() + " est en echec !");
-				return false;
+				break;
 			}
 			case 3: {
 				System.out.println("C'est un match nul !");
 				return true;
 			}
+			case 4: {
+				System.out.println("C'est un echec et pat !");
+				return true;
+			}
 		}
-
 		return false;
 	}
-
 }
