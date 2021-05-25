@@ -2,7 +2,6 @@ package jeu;
 
 import echiquier.*;
 import pieces.Couleur;
-import pieces.FabriquePiece;
 
 /**
  * @author A.Ibrahime, B.Marco, P.Julie
@@ -13,7 +12,7 @@ public class Jeu {
     //L'indice du roi qui doit TOUJOURS être 0
     public static final int INDICE_ROI = 0;
 
-    //Liste des joueurs Blanc et Noir, qui jouent � tour de role
+    //Liste des joueurs Blanc et Noir, qui jouent à tour de role
     private final IJoueur joueurBlanc;
     private final IJoueur joueurNoir;
     private IJoueur joueurActif;
@@ -34,7 +33,7 @@ public class Jeu {
      * @brief Methode d'initialisation des pieces sur l'echiquier
      */
     private void initPosPieces() {
-        if(joueurActif.getModeDeJeu() == FabriquePiece.Mode.FINALE) {
+        if(joueurActif.getModeDeJeu() == Mode.FINALE) {
             echiquier.getCases()[2][4] = joueurBlanc.recupererPiece(INDICE_ROI);
             echiquier.getCases()[1][1] = joueurBlanc.recupererPiece(1);
             echiquier.getCases()[0][4] = joueurNoir.recupererPiece(INDICE_ROI);
@@ -49,7 +48,6 @@ public class Jeu {
      */
     public int miseAJourPartie(IPiece piece, int[] coordActuelle) {
         try{
-
             if (echiquier.echec(this, piece, coordActuelle, this.getJoueurActif().getCouleur())
                     && echiquier.echecEtMat(this, this.getJoueurActif().getCouleur())) {
                 return 1;
@@ -59,6 +57,9 @@ public class Jeu {
             }
             else if (joueurActif.aJusteUnRoi() && getJoueurInactif().aJusteUnRoi()) {
                 return 3;
+            }
+            else if(echiquier.echecEtPat(this, this.getJoueurActif().getCouleur())) {
+                return 4;
             }
         }
         catch(Exception ignored){ }
