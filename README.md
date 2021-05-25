@@ -10,6 +10,7 @@ Jeu d'Echecs en Java
 * Définir des méthodes de d'instance et de classe
 * Rédiger des commentaires 
 * Structuration des classes cohérentes et mise en place d'une interface
+* Facilité d'implémentations de pièces, joueurs et règles
 * Diagramme UML
 
 ***
